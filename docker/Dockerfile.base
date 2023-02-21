@@ -24,6 +24,6 @@ RUN apk add --no-cache \
     && curl https://dl.min.io/client/mc/release/linux-amd64/mc --create-dirs -o /usr/bin/mc \
     && chmod +x /usr/bin/mc \
     && pip install --upgrade pip setuptools wheel \
-    && pip install -r https://raw.githubusercontent.com/jxxghp/nas-tools/master/requirements.txt \
+    && pip install -r https://raw.githubusercontent.com/alvin-7/nas-tools/master/requirements.txt \
     && apk del libffi-dev \
     && rm -rf /tmp/* /root/.cache /var/cache/apk/*
