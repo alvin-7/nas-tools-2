@@ -1,4 +1,4 @@
-name: Build Nas-tools Image
+name: Build NAStool Lite Image
 on:
   workflow_dispatch:
   push:
@@ -6,8 +6,9 @@ on:
       - master
     paths:
       - version.py
-      - docker/Dockerfile
-      - .github/workflows/build-image.yml
+      - docker/Dockerfile.lite
+      - .github/workflows/build-lite.yml
+      - requirements.txt
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -40,15 +41,14 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       -
-        name: Buildx
+        name: Build Lite Image
         uses: docker/build-push-action@v2
         with:
           context: .
-          file: docker/Dockerfile
+          file: docker/Dockerfile.lite
           platforms: |
             linux/amd64
             linux/arm64
           push: true
           tags: |
-            ${{ secrets.DOCKER_USERNAME }}/nas-tools:latest
-            ${{ secrets.DOCKER_USERNAME }}/nas-tools:${{ env.app_version }}
+            ${{ secrets.DOCKER_USERNAME }}/nas-tools:${{ env.app_version }}-lite
